@@ -44,7 +44,7 @@ function loadenv
 
     set lineNumber 0
 
-    for line in (cat $dotenv_file)
+    for line in (sed 's/^export //I' $dotenv_file)
         set lineNumber (math $lineNumber + 1)
 
         # Skip empty lines and comment lines

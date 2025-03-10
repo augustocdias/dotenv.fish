@@ -10,13 +10,13 @@ set -q FISH_DOTENV_BLOCKLIST || set -g FISH_DOTENV_BLOCKLIST "$__fish_config_dir
 function _fish_dotenv_source
     # First shell out to source the file in an isolated fashion. This is to
     # ensure "atomicity" where either all settings as sourced or none at all.
-    if ! fish --private --no-config --command="source $FISH_DOTENV_FILE"
+    if ! fish --private --command="loadenv $FISH_DOTENV_FILE"
         echo "dotenv: Error sourcing '$FISH_DOTENV_FILE' file, bailing." >&2
         return 1
     end
 
     echo "dotenv: Sourcing '$FISH_DOTENV_FILE'" >&2
-    source $FISH_DOTENV_FILE
+    loadenv $FISH_DOTENV_FILE
 end
 
 function _fish_dotenv_hook --on-variable PWD
